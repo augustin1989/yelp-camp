@@ -17,7 +17,10 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
-mongoose.connect(process.env.DATABASEURL), {useMongoClient: true};
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url);
+
+// mongoose.connect(process.env.DATABASEURL), {useMongoClient: true};
 
 //mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
 //mongoose.connect("mongodb://heroku_8jwq1w5d:iu9sq9e2t9qnukt7e0pao2t1nu@ds147884.mlab.com:47884/heroku_8jwq1w5d", {useMongoClient: true});
