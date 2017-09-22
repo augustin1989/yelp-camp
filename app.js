@@ -17,8 +17,11 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
+mongoose.connect(process.env.DATABASEURL), {useMongoClient: true};
+
 //mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
-mongoose.connect("mongodb://heroku_8jwq1w5d:iu9sq9e2t9qnukt7e0pao2t1nu@ds147884.mlab.com:47884/heroku_8jwq1w5d", {useMongoClient: true});
+//mongoose.connect("mongodb://heroku_8jwq1w5d:iu9sq9e2t9qnukt7e0pao2t1nu@ds147884.mlab.com:47884/heroku_8jwq1w5d", {useMongoClient: true});
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -49,11 +52,8 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function () {
+
+app.listen(process.env.PORT || 3001, process.env.IP, function () {
    console.log("Server running!");
 });
 
-
-// app.listen(3000, function (req, res) {
-//    console.log("Server running!");
-// });
